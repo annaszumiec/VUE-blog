@@ -10,7 +10,9 @@ const getPosts = () => {
     const load = async () => {
         try {
 
-            const restore = await projectFirestore.collection('posts').get()
+            const restore = await projectFirestore.collection('posts')
+                .orderBy('createdAt', 'desc')
+                .get()
 
             posts.value = restore.docs.map(doc => {
 
